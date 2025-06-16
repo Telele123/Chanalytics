@@ -68,3 +68,4 @@ Displays the three timeline graphs with appropriate headings.
  
 Disclaimer:
 Most of the HTML styling was done with help from ChatGPT. My original design was much simpler but fully functional. See below
+
