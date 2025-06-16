@@ -1,0 +1,106 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 900px;">
+  
+   <div class="text-center mb-4">
+    <h1 class="d-inline-block px-4 py-2 rounded-pill" style="background: white; color: #1A8754; font-size: 2.5rem;">
+      Words
+    </h1>
+  </div>
+  
+ <!-- Unique Words Count -->
+  <div class="text-center mb-4">
+    <h3 class="d-inline-block px-4 py-2 rounded-pill text-muted" style="background: white; font-size: 2.0rem;">
+      Unique Words Used: {{ unique_words_count }}
+    </h3>
+  </div>
+
+  <!-- Scrollable Cards for Top Words -->
+  <div class="text-center mb-3">
+    <h4 class="d-inline-block px-4 py-2 rounded-pill text-muted" style="background: white; font-size: 1.25rem;">
+      Most Frequently Used Words
+    </h4>
+  </div>
+
+  <div class="d-flex overflow-auto gap-4 pb-4 mb-5" style="scroll-snap-type: x mandatory;">
+    {% set card_style = "min-width: 360px; scroll-snap-align: start; background-color: #1A8754; color: white; border-radius: 1rem;" %}
+    {% set title_style = "font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;" %}
+    {% set word_style = "font-size: 1.2rem; display: flex; justify-content: space-between; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1); margin-bottom: 0.5rem; border-radius: 0.5rem;" %}
+
+    <div class="card p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Everyone</h5>
+      {% for word, count in top10words %}
+        <div style="{{ word_style }}">
+          <span>{{ word }}</span><span>{{ count }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="card p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">{{ name1 }}</h5>
+      {% for word, count in word_counts1 %}
+        <div style="{{ word_style }}">
+          <span>{{ word }}</span><span>{{ count }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="card p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">{{ name2 }}</h5>
+      {% for word, count in word_counts2 %}
+        <div style="{{ word_style }}">
+          <span>{{ word }}</span><span>{{ count }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Scrollable Cards for Word Clouds -->
+  <div class="text-center mb-3">
+    <h4 class="d-inline-block px-4 py-2 rounded-pill text-muted" style="background: white; font-size: 1.25rem;">
+      Word Clouds
+    </h4>
+  </div>
+
+  <div class="d-flex overflow-auto gap-4 pb-4 mb-5" style="scroll-snap-type: x mandatory;">
+    {% set cloud_card_style = "min-width: 360px; scroll-snap-align: start; background-color: #1A8754; color: white; border-radius: 1rem;" %}
+
+    <div class="card p-4 flex-shrink-0 shadow-sm text-center" style="{{ cloud_card_style }}">
+      <h5 style="{{ title_style }}">Everyone</h5>
+      <img src="{{ url_for('static', filename='wordcloud.png') }}" alt="Word Cloud" class="img-fluid rounded">
+    </div>
+
+    <div class="card p-4 flex-shrink-0 shadow-sm text-center" style="{{ cloud_card_style }}">
+      <h5 style="{{ title_style }}">{{ name1 }}</h5>
+      <img src="{{ url_for('static', filename='wordcloud1.png') }}" alt="Word Cloud for {{ name1 }}" class="img-fluid rounded">
+    </div>
+
+    <div class="card p-4 flex-shrink-0 shadow-sm text-center" style="{{ cloud_card_style }}">
+      <h5 style="{{ title_style }}">{{ name2 }}</h5>
+      <img src="{{ url_for('static', filename='wordcloud2.png') }}" alt="Word Cloud for {{ name2 }}" class="img-fluid rounded">
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="text-center mt-5">
+    <h2 class="d-inline-block px-4 py-2 rounded-pill" style="background: white; font-size: 2.5rem;">Search for a word</h2>
+    <form action="/words" method="post" class="mb-4">
+      <div class="input-group">
+        <input type="text" id="search_word" name="search_word" class="form-control" placeholder="Enter word">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+
+    {% if search1 is not none %}
+    <div class="d-inline-block px-4 py-2 rounded-pill bg-white text-dark shadow-sm">
+        <p class="mb-1">{{ name1 }} used <strong>{{ search_word }}</strong> {{ search1 }} times</p>
+        <p class="mb-1">{{ name2 }} used <strong>{{ search_word }}</strong> {{ search2 }} times</p>
+        <p class="mb-0">Total usage of <strong>{{ search_word }}</strong>: {{ search1 + search2 }} times</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

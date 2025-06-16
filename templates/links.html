@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 900px;">
+
+  <!-- Headings in white bubbles -->
+  <div class="text-center mb-4">
+    <h1 class="d-inline-block px-4 py-2 rounded-pill" style="background: white; color: #1A8754; font-size: 2.5rem;">
+      Links
+    </h1>
+  </div>
+
+  <div class="text-center mb-5">
+    <h4 class="d-inline-block px-4 py-2 rounded-pill text-muted" style="background: white; font-size: 1.25rem;">
+      You've shared a lot of memories
+    </h4>
+  </div>
+
+  <!-- Scrollable cards -->
+  <div class="d-flex overflow-auto gap-4 pb-3" style="scroll-snap-type: x mandatory;">
+
+    {% set card_style = "min-width: 360px; scroll-snap-align: start; background-color: #1A8754; color: white;" %}
+    {% set title_style = "font-size: 1.75rem; font-weight: bold;" %}
+    {% set icon_style = "font-size: 3rem; margin-top: 1rem;" %}
+    {% set count_style = "font-size: 3rem; font-weight: bold; margin-top: 1rem;" %}
+    {% set duration_style = "font-size: 1.25rem;" %}
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Images<br><i class="fas fa-image" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countimages }}</p>
+    </div>
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Videos<br><i class="fas fa-video" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countvideos }}</p>
+    </div>
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Audios<br><i class="fas fa-music" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countaudio }}</p>
+    </div>
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Voice Calls<br><i class="fas fa-phone-alt" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countvoicecalls }}</p>
+      {% if durationofvoicecalls >= 60 %}
+        <p class="mt-2" style="{{ duration_style }}">Duration: {{ (durationofvoicecalls / 60) | round(1) }} hours</p>
+      {% else %}
+        <p class="mt-2" style="{{ duration_style }}">Duration: {{ durationofvoicecalls }} minutes</p>
+      {% endif %}
+    </div>
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Video Calls<br><i class="fas fa-video" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countvideocalls }}</p>
+      {% if durationofvideocalls >= 60 %}
+        <p class="mt-2" style="{{ duration_style }}">Duration: {{ (durationofvideocalls / 60) | round(1) }} hours</p>
+      {% else %}
+        <p class="mt-2" style="{{ duration_style }}">Duration: {{ durationofvideocalls }} minutes</p>
+      {% endif %}
+    </div>
+
+    <div class="card text-center p-4 flex-shrink-0 shadow-sm" style="{{ card_style }}">
+      <h5 style="{{ title_style }}">Links<br><i class="fas fa-link" style="{{ icon_style }}"></i></h5>
+      <p style="{{ count_style }}">{{ countlinks }}</p>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

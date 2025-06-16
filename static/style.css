@@ -1,0 +1,43 @@
+/* Size for brand */
+
+body {
+    background-image: url("/static/background.png");  /* or .jpg etc. */
+    background-repeat: repeat;
+    background-size: contain;  /* or use 'contain' for scaling tiles if needed */
+    background-position: top left;
+    background-attachment: fixed; /* optional: background doesn't scroll with page */
+}
+
+
+.speech-bubble {
+    position: relative;
+    background: #f0f0f0;
+    border-radius: 1em;
+    padding: 10px 15px;
+    margin: 10px;
+    max-width: 60%;
+    font-size: 1rem;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Tail pointing to the left (like sender) */
+.speech-bubble::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #f0f0f0;
+}
+
+/* Optional: Tail pointing to the right (like receiver) */
+.speech-bubble.right::before {
+    left: auto;
+    right: -10px;
+    border-right-color: transparent;
+    border-left-color: #f0f0f0;
+}
+
+

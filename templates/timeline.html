@@ -1,0 +1,30 @@
+{%extends "layout.html"%}
+
+{%block content%}
+<div class="text-center">
+  <h1 class="d-inline-block px-4 py-2 rounded-pill mx-auto mb-3" style="background: white; color: #1A8754;">Timeline</h1>
+  <br>
+  <h2 class="d-inline-block px-4 py-2 rounded-pill mx-auto mb-4" style="background: white;">When do you chat the most</h2>
+</div>
+
+<div class="container my-5 d-flex justify-content-center">
+  <div class="p-4 bg-white rounded shadow w-100" style="max-width: 800px;">
+
+    <div class="text-center">
+      <h3 class="mb-3">Busiest Hour</h3>
+      <p class="fs-4">{{tophour[0]}}h00 was your busiest hour with {{tophour[1]}} texts</p>
+      <img src="{{ url_for('static', filename='most_common_hours.png') }}" alt="Bar Chart of Texts by Hour" class="img-fluid my-4">
+
+      <h3 class="mb-3 mt-5">Busiest Day of the Month</h3>
+      <p class="fs-4">Day {{topday[0]}} was your busiest day with {{topday[1]}} texts</p>
+      <img src="{{ url_for('static', filename='most_common_months.png') }}" alt="Bar Chart of Texts by Day" class="img-fluid my-4">
+
+      <h3 class="mb-3 mt-5">Busiest Weekday</h3>
+      <p class="fs-4">{{topweekday[0]}} was your busiest weekday with {{topweekday[1]}} texts</p>
+      <img src="{{ url_for('static', filename='most_common_days.png') }}" alt="Bar Chart of Texts by Day" class="img-fluid my-4">
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+

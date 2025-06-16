@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+  .bubble {
+    border-radius: 2rem;
+    padding: 1rem 1.5rem;
+    color: white;
+    max-width: 70%;
+    margin: 1rem 0;
+    position: relative;
+    word-wrap: break-word;
+  }
+
+  .left {
+    background-color: #DD5E72;
+    margin-left: 15%;
+  }
+
+  .right {
+    background-color: #6FB9CF;
+    margin-left: 50%;
+  }
+
+  .bubble.white-bg {
+    background-color: white !important;
+    color: black;
+  }
+</style>
+
+<div class="container my-5 p-4 shadow rounded" style="max-width: 900px; background-color: #F0F0F0; overflow-y: auto; max-height: 90vh;">
+  <div class="d-flex flex-column align-items-start">
+
+    <h1 class="d-inline-block px-4 py-2 rounded-pill" style="background: white; color: #1A8754; font-size: 2.5rem;">
+      Messages
+    </h1>
+
+    <div class="bubble left">
+      <strong>{{ name1 }} and {{ name2 }}'s Whatsapp Analysis</strong><br>
+      over {{ days_passed }} days
+    </div>
+
+    <div class="bubble right">
+      from {{ first_timestamp.strftime('%d %B %Y') }} to {{ last_timestamp.strftime('%d %B %Y') }}
+    </div>
+
+    <div class="bubble left">
+      You have exchanged a total of {{ countmessages }} messages
+    </div>
+
+    <div class="bubble left">
+      {{ name1 }} has sent {{ countmessages1 }} texts
+    </div>
+
+    <div class="bubble right">
+      {{ name2 }} has sent {{ countmessages2 }} texts
+    </div>
+
+    <div class="bubble left">
+      {{ name1 }} has sent {{ countwords1 }} words
+    </div>
+
+    <div class="bubble right">
+      {{ name2 }} has sent {{ countwords2 }} words
+    </div>
+
+    <div class="bubble left">
+      <strong>Your first texts</strong>
+    </div>
+
+    <div class="bubble left">
+      <strong>{{ name1 }}:</strong> {{ first_message }}
+    </div>
+
+    <div class="bubble right">
+      <strong>{{ name2 }}:</strong> {{ second_message }}
+    </div>
+
+   <div class="bubble left white-bg">
+      <img src="{{ url_for('static', filename='pie_chart.png') }}" alt="Pie Chart of Texts" class="img-fluid">
+    </div>
+
+    <div class="bubble right white-bg">
+      <img src="{{ url_for('static', filename='pie_chart_words.png') }}" alt="Pie Chart of Words" class="img-fluid">
+    </div>
+
+  </div>
+</div>
+{% endblock %}

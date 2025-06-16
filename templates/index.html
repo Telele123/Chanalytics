@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h1 class="mb-4 text-success text-center">📈 Chanalytics</h1>
+
+        <h2 class="h4">Generate a WhatsApp analysis report</h2>
+        <p class="text-muted">Currently only supports 1-on-1 chats.</p>
+
+        <ol class="list-group list-group-numbered mb-4">
+            <li class="list-group-item">Open WhatsApp</li>
+            <li class="list-group-item">Open the chat you’d like to analyse</li>
+            <li class="list-group-item">Tap the person’s name at the top</li>
+            <li class="list-group-item">Scroll down and select <strong>"Export Chat"</strong></li>
+            <li class="list-group-item">Choose <strong>"Without Media"</strong></li>
+            <li class="list-group-item">Save the exported file to your computer (should be .txt)</li>
+            <li class="list-group-item">Upload it below</li>
+        </ol>
+
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="txtfile" class="form-label">Choose your WhatsApp text file:</label>
+                <input class="form-control" type="file" name="txtfile" accept=".txt" required>
+            </div>
+            <button type="submit" name="action" value="analyse" class="btn btn-success">Submit</button>
+        </form>
+
+        {% if error %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="alert alert-success mt-3">{{ success }}</div>
+            <pre class="bg-light p-3 rounded mt-3">{{ text }}</pre>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
